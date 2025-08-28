@@ -1,4 +1,5 @@
 class ResponseHandler {
+
   constructor(res) {
     this.res = res;
   }
@@ -35,13 +36,13 @@ class ResponseHandler {
       errors,
     });
   }
+
   authorizathionError(message) {
      this.res.status(401).json({
       success: false,
       message,
     });
   }
-
 
 }
 

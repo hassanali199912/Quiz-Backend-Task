@@ -1,0 +1,494 @@
+{
+	"info": {
+		"_postman_id": "backend-api-collection",
+		"name": "Backend API Collection",
+		"description": "Complete API collection for User and Announcement endpoints",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "12345678"
+	},
+	"item": [
+		{
+			"name": "Users",
+			"item": [
+				{
+					"name": "User Login",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"username\": \"user@example.com\",\n  \"password\": \"password123\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/users/login",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"users",
+								"login"
+							]
+						},
+						"description": "Authenticate user and get JWT token"
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Users",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{auth_token}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/users",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"users"
+							]
+						},
+						"description": "Get all users (requires admin token)"
+					},
+					"response": []
+				},
+				{
+					"name": "Get User by ID",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{auth_token}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/users/:id",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"users",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "user_id_here",
+									"description": "User ID to retrieve"
+								}
+							]
+						},
+						"description": "Get user by ID (requires admin token)"
+					},
+					"response": []
+				},
+				{
+					"name": "Filter Users",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{auth_token}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/users/filter?role=CODEHASH&email=user@example.com",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"users",
+								"filter"
+							],
+							"query": [
+								{
+									"key": "role",
+									"value": "CODEHASH",
+									"description": "Filter by user role (CODEMODE or CODEHASH)"
+								},
+								{
+									"key": "email",
+									"value": "user@example.com",
+									"description": "Filter by email"
+								}
+							]
+						},
+						"description": "Filter users by criteria (requires admin token)"
+					},
+					"response": []
+				},
+				{
+					"name": "Create User",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{auth_token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"fname\": \"John\",\n  \"lname\": \"Doe\",\n  \"email\": \"john.doe@example.com\",\n  \"password\": \"password123\",\n  \"role\": \"CODEHASH\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/users",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"users"
+							]
+						},
+						"description": "Create new user (requires admin token)"
+					},
+					"response": []
+				},
+				{
+					"name": "Update User",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{auth_token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"fname\": \"John Updated\",\n  \"lname\": \"Doe Updated\",\n  \"email\": \"john.updated@example.com\",\n  \"role\": \"CODEHASH\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/users/:id",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"users",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "user_id_here",
+									"description": "User ID to update"
+								}
+							]
+						},
+						"description": "Update user (requires admin token)"
+					},
+					"response": []
+				},
+				{
+					"name": "Delete User",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{auth_token}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/users/:id",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"users",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "user_id_here",
+									"description": "User ID to delete"
+								}
+							]
+						},
+						"description": "Delete user (requires admin token)"
+					},
+					"response": []
+				}
+			],
+			"description": "User management endpoints"
+		},
+		{
+			"name": "Announcements",
+			"item": [
+				{
+					"name": "Get All Announcements",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/announcements",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"announcements"
+							]
+						},
+						"description": "Get all announcements (public endpoint)"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Announcement by ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/announcements/:id",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"announcements",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "announcement_id_here",
+									"description": "Announcement ID to retrieve"
+								}
+							]
+						},
+						"description": "Get announcement by ID (public endpoint)"
+					},
+					"response": []
+				},
+				{
+					"name": "Filter Announcements",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/announcements/filter?course=Computer Science&priority=high&category=academic",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"announcements",
+								"filter"
+							],
+							"query": [
+								{
+									"key": "course",
+									"value": "Computer Science",
+									"description": "Filter by course"
+								},
+								{
+									"key": "priority",
+									"value": "high",
+									"description": "Filter by priority (low, medium, high)"
+								},
+								{
+									"key": "category",
+									"value": "academic",
+									"description": "Filter by category (general, academic, events, urgent)"
+								}
+							]
+						},
+						"description": "Filter announcements by criteria (public endpoint)"
+					},
+					"response": []
+				},
+				{
+					"name": "Create Announcement",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{auth_token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"title\": \"Important Course Update\",\n  \"content\": \"The course schedule has been updated for next week.\",\n  \"course\": \"Computer Science\",\n  \"priority\": \"high\",\n  \"category\": \"academic\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/announcements",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"announcements"
+							]
+						},
+						"description": "Create new announcement (requires admin token)"
+					},
+					"response": []
+				},
+				{
+					"name": "Update Announcement",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{auth_token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"title\": \"Updated Course Update\",\n  \"content\": \"The course schedule has been updated with new information.\",\n  \"priority\": \"medium\",\n  \"category\": \"academic\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/announcements/:id",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"announcements",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "announcement_id_here",
+									"description": "Announcement ID to update"
+								}
+							]
+						},
+						"description": "Update announcement (requires admin token)"
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Announcement",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{auth_token}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/announcements/:id",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"announcements",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "announcement_id_here",
+									"description": "Announcement ID to delete"
+								}
+							]
+						},
+						"description": "Delete announcement (requires admin token)"
+					},
+					"response": []
+				}
+			],
+			"description": "Announcement management endpoints"
+		},
+		{
+			"name": "Test Endpoint",
+			"item": [
+				{
+					"name": "Test Server",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/test",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"test"
+							]
+						},
+						"description": "Test if server is running"
+					},
+					"response": []
+				}
+			],
+			"description": "Server test endpoint"
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "base_url",
+			"value": "http://localhost:8080",
+			"type": "string",
+			"description": "Base URL for the API server"
+		},
+		{
+			"key": "auth_token",
+			"value": "your_jwt_token_here",
+			"type": "string",
+			"description": "JWT authentication token (obtain from login endpoint)"
+		}
+	]
+}

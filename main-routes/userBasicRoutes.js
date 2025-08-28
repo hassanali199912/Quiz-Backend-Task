@@ -27,8 +27,8 @@ class UserControllerCustom extends userBasicControllers {
   async login(req, res) {
     const responseHandler = new ResponseHandler(res);
     try {
-      const { username, password } = req.body;
-      const user = await userBasicCrudObject.filterBy({ username: username });
+      const { email, password } = req.body;
+      const user = await userBasicCrudObject.filterBy({ email: email });
       if (user.length === 0) {
         return responseHandler.notFound("User not found");
       }
@@ -42,6 +42,7 @@ class UserControllerCustom extends userBasicControllers {
       return responseHandler.success(
         {
           token: token,
+          _id: userData._id,
           role: userData.role === "CODEMODE" ? "ADMIN" : "USER",
           email: userData.email,
           fname: userData.fname,
@@ -60,13 +61,13 @@ class UserRoutesCustom extends userBasicRoutes {
   constructor(controller) {
     super(controller);
   }
+
   mainRoutes() {
     this.requiredValidationsRoutes();
     this.protectedRoutes();
     super.mainRoutes();
   }
 
-  // This is a Protected Routes Authorized By Admin
   protectedRoutes() {
     this.router.post(
       "/",
@@ -78,7 +79,6 @@ class UserRoutesCustom extends userBasicRoutes {
       (req, res) => this.controller.create(req, res)
     );
 
-    // for Update User by Admin only
     this.router.put(
       "/:id",
       checkToken,
@@ -89,7 +89,6 @@ class UserRoutesCustom extends userBasicRoutes {
       (req, res) => this.controller.update(req, res)
     );
 
-    // for Delete User by Admin only
     this.router.delete("/:id", checkToken, isAdmin, (req, res) =>
       this.controller.delete(req, res)
     );
