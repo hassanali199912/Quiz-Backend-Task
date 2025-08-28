@@ -15,6 +15,7 @@ class QuizRoutesCustom extends quizBasicRoutes {
 
   mainRoutes() {
     this.protectedRoutes();
+    super.mainRoutes();
   }
 
   protectedRoutes() {

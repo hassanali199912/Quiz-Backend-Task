@@ -18,6 +18,7 @@ class AnnouncementRoutesCustom extends announcementBasicRoutes {
 
   mainRoutes() {
     this.protectedRoutes();
+    super.mainRoutes();
   }
 
   protectedRoutes() {
